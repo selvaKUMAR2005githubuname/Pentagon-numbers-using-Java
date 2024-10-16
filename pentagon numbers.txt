@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+  
+      static Set<Long> pent = new HashSet<>();
+
+    static void generate() {
+        for (long n = 1; n <= 1000000; n++) {
+            long temp = n * (3 * n - 1) / 2;
+            pent.add(temp);
+        }
+    }
+
+    public static void main(String[] args) {
+        generate();
+        Scanner scanner = new Scanner(System.in);
+        long N = scanner.nextLong();
+        long K = scanner.nextLong();
+
+        for (long n = K + 1; n <= N; n++) {
+            long diff = n * (3 * n - 1) / 2 - (n - K) * (3 * (n - K) - 1) / 2;
+            long add = n * (3 * n - 1) / 2 + (n - K) * (3 * (n - K) - 1) / 2;
+            
+            if (pent.contains(diff) || pent.contains(add)) {
+                System.out.println(n * (3 * n - 1) / 2);
+            }
+        }
+    }
+}
